@@ -1,0 +1,212 @@
+.homeBody {
+    /*background: url("https://storage.needpix.com/rsynced_images/clean-blue-background.jpg");*/
+    /*background-attachment: fixed;*/
+    /*background-repeat: no-repeat;*/
+    /*min-height: 100vh;*/
+    /*min-width: 100vw;*/
+    /*padding: 5%;*/
+}
+
+.main-todo-input {
+    padding: 0 120px 0 0;
+    border-radius: 1px;
+}
+
+.fl-wrap {
+    /*float: left;*/
+    width: 100%;
+    position: relative;
+}
+
+.main-todo-input-item {
+    /*float: left;*/
+    width: 100%;
+    box-sizing: border-box;
+    /*height: 50px;*/
+    position: relative;
+    display: inline;
+}
+
+.main-todo-input-item input {
+    float: left;
+    border: none;
+    height: 52px;
+    width: 100%;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.main-search-button {
+    background: darkblue;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.main-search-button {
+    position: absolute;
+    right: 0px;
+    height: 60px;
+    width: 120px;
+    color: #fff;
+    top: 0;
+    border: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    cursor: pointer
+}
+
+.main-todo-input-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+:focus {
+    outline: 0
+}
+
+@media only screen and (max-width: 768px) {
+    .main-todo-input {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 14px 20px 10px;
+        border-radius: 10px;
+    }
+
+    .main-todo-input-item {
+        width: 100%;
+        border: 1px solid #eee;
+        height: 50px;
+        border: none;
+        margin-bottom: 10px
+    }
+
+    .main-todo-input-item input {
+        border-radius: 6px !important;
+        /*background: #fff*/
+    }
+
+    .main-search-button {
+        position: relative;
+        float: left;
+        width: 100%;
+        border-radius: 6px
+    }
+}
+
+.remove {
+    float: right;
+    color: #757575 !important;
+    font-size: 14px
+}
+
+#list-items {
+    padding-left: 20px;
+    padding-top: 15px
+}
+
+ul {
+    padding: 0;
+    text-align: left;
+    list-style: none
+}
+
+.todo-text {
+    color: #757575;
+    margin-left: 10px
+}
+
+.strike {
+    color: blue
+}
+
+.todo-listing {
+    padding: 0px 29px 0 0;
+    margin-top: 54px !important
+}
+
+table {
+    font-family: arial, sans-serif;
+    /*border-collapse: collapse;*/
+    width: 100%;
+}
+
+th {
+    text-align: center;
+    /*padding: 8px;*/
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+    width: 100%;
+}
+
+.container {
+    padding: 16px;
+    background-color: #282c34;
+    margin-top: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    /*width: 50%;*/
+}
+
+.deleteAllBtn{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: crimson;
+    width: 600px;
+}
+
+.ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    float: right;
+}
+
+.li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.li a.active {
+    background-color: #4CAF50;
+    color: lightgreen;
+}
+
+.li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}

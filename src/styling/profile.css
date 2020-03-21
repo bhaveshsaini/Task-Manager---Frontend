@@ -1,0 +1,144 @@
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 6%;
+    border-radius: 0.5rem;
+    background-color: #DEB887;
+    width: 60%;
+    overflow: auto;
+}
+
+.city{
+    display: none;
+}
+
+.profile-head{
+    display: flex;
+    float: left;
+    width: 100%;
+}
+
+.profile-head h1{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.profile-head h2 {
+    font-family: Serif;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+}
+
+.profile-head .person-info{
+    font-family: Times;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    color: black;
+}
+
+.first{
+    float: left;
+}
+
+.second{
+    margin-left: 10%;
+    width: 100%;
+    text-align: left;
+}
+
+img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.signup-div{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.upload-form{
+    padding: 4%;
+    margin: 0 auto;
+    width: 75%;
+    height: 75%;
+    background-color: #fffaf0;
+
+}
+
+.upload-form b{
+    color: black;
+    font-family: Times;
+
+}
+
+.input-btn input{
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 4px 2px;
+}
+
+.upload-btn{
+    /*width: 10%;*/
+    margin: 20px;
+    background-color: #483d8b;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+
+.save-btn{
+    /*width: 10%;*/
+    margin: 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+}
+
+.remove-btn{
+   
+    margin: 20px;
+    background-color: tomato;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+
+.changePhoto-btn{
+    background-color: #FFF8DC;
+    color: black;
+    padding: 10px 25px;
+    text-align: right;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 20px;
+}
+
+.photo-button{
+    text-align: right;
+    background-color: black;
+   /*margin-left: 50%;*/
+
+}

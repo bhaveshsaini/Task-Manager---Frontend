@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from "axios";
 import '../styling/home.css'
+import Header from "./Header";
 
 class Home extends Component {
     constructor(props) {
@@ -37,10 +38,6 @@ class Home extends Component {
 
 
 //***************************************************
-    logout = () => {
-        localStorage.clear()
-        this.props.history.push('/')
-    }
 
     // update description as user is typing
     handleChangeDescription = (e) => {
@@ -79,7 +76,7 @@ class Home extends Component {
                 }
             }
         ).
-        then((res) => { // updating the state with the updated value of the element 'complete'
+        then((res) => { // updating the state with the updated value of the element 'completed'
              let counter = 0
              this.state.response.find((element) => {
                  if(element._id === e){
@@ -173,37 +170,51 @@ class Home extends Component {
         })
     }
 
-    // handle background color of status of task
-    handleBackgroundColor = (id, status) => {
-        if(status === 'true')
-            document.getElementById(id).backgroundColor = 'green'
-        else
-            document.getElementById(id).backgroundColor = 'red'
-
+    // get remaining tasks from database
+    remainingTasks = () => {
+        Axios.get('http://localhost/mytasks',
+            {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            }).
+        then((res) => { // update the paragraph tag
+            document.getElementById('remaining-tasks').innerHTML = res.data
+            if(res.data === 0)
+                document.getElementById('label').style.backgroundColor = '#4CAF50'
+            else
+                document.getElementById('label').style.backgroundColor = 'crimson'
+        }).
+        catch((e) => {
+            console.log('error getting tasks ' + e)
+        })
     }
+
 
 //***************************************************
     render() {
         return (
             <div>
-
-                <ul className={"ul"}>
-                    <li className={"li"}><a onClick={() => this.logout()}>Logout</a></li>
-                </ul>
+                <Header active = {'home'}/>
 
                 <body className={"homeBody"}>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
+                    <div className={'head'}>
+                        <div className={"container"}>
+                            <input onChange={this.handleChangeDescription} type="text" placeholder="Add an item"/>
+                            <button onClick={this.handleAddTask} className="w3-button w3-xlarge w3-red w3-card-4 button">+</button>
+                        </div>
 
-                    <div className={"container"}>
-                        <input onChange={this.handleChangeDescription} type="text" placeholder="Add an item"/>
-                        <button onClick={this.handleAddTask} className="w3-button w3-xlarge w3-red w3-card-4 button">+</button>
+                        <div className={'delete-btn'}>
+                            <button className={"deleteAllBtn"} onClick={() => this.handleDeleteAllTasks(localStorage.getItem('userId'))}>Delete all</button>
+                            <label id={'label'} className={'label'}>Tasks Remaining <p className={'paragraph'} onLoad={this.remainingTasks()} id={'remaining-tasks'}></p></label>
+                        </div>
                     </div>
 
 
                     <div className="row">
-                        <button className={"deleteAllBtn"} onClick={() => this.handleDeleteAllTasks(localStorage.getItem('userId'))}>Delete all</button>
                         <div className="col-md-12">
                             <div className="main-todo-input-wrap">
                                 <div className="main-todo-input fl-wrap todo-listing">
@@ -216,7 +227,7 @@ class Home extends Component {
                                                     <tr>
                                                         <td onClick={() => this.handleEditButton(station._id, station.description)} >{station.description}</td>
                                                         {/*implement the change color feature below*/}
-                                                        <td onLoad={() => this.handleBackgroundColor(station._id, station.completed)} onClick={() => this.toggleTaskComplete(station._id, station.completed)} className={"button"}>{station.completed}</td>
+                                                        <td id={'statusOftask'} onClick={() => this.toggleTaskComplete(station._id, station.completed)} className={"button"}>{station.completed}</td>
                                                         <td className="btn"><i onClick={() => this.handleDeleteButton(station._id)} class="fa fa-trash"></i></td>
                                                     </tr>
                                                 )}

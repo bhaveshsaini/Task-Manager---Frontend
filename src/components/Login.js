@@ -10,10 +10,6 @@ class Login extends Component {
             this.props.history.push('/Home')
 
         this.state = {
-            email: '',
-            password: '',
-            name: ''
-
         }
     }
 
@@ -26,10 +22,11 @@ class Login extends Component {
 
         if(this.state.password.length > 5) {
             if (this.state.email.includes('.com')) {
-                if (this.state.email !== '' && this.state.password !== '') {
+                if (this.state.email !== '' && this.state.password !== '') { // if everything is valid, then send axios request
+                    
                     const data = {
                         email: this.state.email,
-                        password: this.state.password
+                        password: this.state.password,
                     }
 
                     Axios.post('http://localhost/users/login', data).then((res) => {
@@ -46,6 +43,10 @@ class Login extends Component {
                         } else {
                             localStorage.setItem('token', res.data.user.token)
                             localStorage.setItem('userId', res.data.user._id)
+                            localStorage.setItem('fname', res.data.user.firstname)
+                            localStorage.setItem('lname', res.data.user.lastname)
+                            localStorage.setItem('age', res.data.user.age)
+                            localStorage.setItem('email', res.data.user.email)
                             this.props.history.push("/Home")
                         }
                     }).catch((e) => {
@@ -80,10 +81,9 @@ class Login extends Component {
 
     signUpUser = (res) => {
         res.preventDefault()
-
         if(this.state.password.length > 5)
         {
-            if(this.state.email.includes('.com'))
+            if(this.state.email.includes('.com')) // if everything is valid then sign up user
             {
                 Axios.post('http://localhost/users', this.state)
                     .then((res) => {
@@ -97,6 +97,10 @@ class Login extends Component {
                                 .then((res) => {
                                     localStorage.setItem('token', res.data.user.token)
                                     localStorage.setItem('userId', res.data.user._id)
+                                    localStorage.setItem('fname', res.data.user.firstname)
+                                    localStorage.setItem('lname', res.data.user.lastname)
+                                    localStorage.setItem('age', res.data.user.age)
+                                    localStorage.setItem('email', res.data.user.email)
                                     this.props.history.push("/Home")
                                 })
                                 .catch((e) => {
@@ -156,8 +160,8 @@ class Login extends Component {
                             <div className="row">
                                 <div className="col">
                                     <h1 className={"signIn"}>Login</h1>
-                                    <input onChange={this.changeHandler} type="email" name="email" placeholder="Email"/>
-                                    <input onChange={this.changeHandler} type="password" name="password" placeholder="Password"/>
+                                    <input onChange={this.changeHandler} type="email" name="email" placeholder="Email" required/>
+                                    <input onChange={this.changeHandler} type="password" name="password" placeholder="Password" required/>
                                     <input className={"signIn"} type="submit" value="Login"/>
                                     <input className={"signIn"} name={"createAccount"} value={"Register"} onClick={this.handleSignUpForm}/>
                                 </div>
@@ -175,14 +179,20 @@ class Login extends Component {
                                         <strong id={"strongID"}></strong> <p id={"pID"}></p>
                                     </div>
 
-                                    <label><b>Name</b></label>
-                                    <input onChange={this.changeHandler} type="text" placeholder="Full Name" name="name" required/>
+                                    <label><b>First Name</b></label>
+                                    <input onChange={this.changeHandler} type="text" placeholder="First Name" name="firstname" required/>
+
+                                    <label><b>Last Name</b></label>
+                                    <input onChange={this.changeHandler} type="text" placeholder="Last Name" name="lastname" required/>
 
                                     <label htmlFor="email"><b>Email</b></label>
-                                    <input onChange={this.changeHandler} type="email" placeholder="Enter Email" name="email" required/>
+                                    <input onChange={this.changeHandler} type="email" placeholder="Email" name="email" required/>
 
                                     <label htmlFor="password"><b>Password</b></label>
-                                    <input onChange={this.changeHandler} type="password" placeholder="Enter Password" name="password" required/>
+                                    <input onChange={this.changeHandler} type="password" placeholder="Password" name="password" required/>
+
+                                    <label htmlFor="password"><b>Age</b></label>
+                                    <input onChange={this.changeHandler} type="number" placeholder="Age" name="age"/>
 
                                     <div className="clearfix">
                                         <input type="button" onClick={this.handleOnclick3} className="cancelbtn" value={"Cancel"}></input>

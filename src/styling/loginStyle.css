@@ -1,9 +1,8 @@
-.loginbody {
-    font-family: Arial, Helvetica, sans-serif;
-    /*background-image: url("https://d39l2hkdp2esp1.cloudfront.net/img/photo/141700/141700_00_2x.jpg");*/
-    background-size: cover;
-    /*background-repeat: no-repeat;*/
-}
+/*body {*/
+/*    background-image: url("https://66.media.tumblr.com/2da589974faccb4a77bfd594cd34f3e7/tumblr_nixfyuZOmL1tf8vylo1_500.png");*/
+/*    background-size: cover;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 * {
     box-sizing: border-box;
@@ -18,9 +17,6 @@
     width: 600px;
     margin: 0 auto;
 }
-
-
-/* style the container */
 
 
 .signIn{
@@ -184,14 +180,13 @@ p{
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    /*overflow: auto; !* Enable scroll if needed *!*/
     background-color: #474e5d;
     padding-top: 50px;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    /*background-color: #fefefe;*/
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     /*border: 1px solid #888;*/
     /*width: 100%; !* Could be more or less, depending on screen size *!*/

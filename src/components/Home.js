@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import Axios from "axios";
 import '../styling/home.css'
 import Header from "./Header";
@@ -32,6 +32,7 @@ class Home extends Component {
         catch((e) => {
             console.log('error getting tasks ' + e)
         })
+
 
     } //end constructor
 
@@ -86,6 +87,7 @@ class Home extends Component {
                  }
                  counter = counter + 1
              })
+
         }).
         catch((e) => {
             console.log(e)
@@ -203,7 +205,7 @@ class Home extends Component {
 
                     <div className={'head'}>
                         <div className={"container"}>
-                            <input onChange={this.handleChangeDescription} type="text" placeholder="Add an item"/>
+                            <input onChange={this.handleChangeDescription} type="text" placeholder="New task"/>
                             <button onClick={this.handleAddTask} className="w3-button w3-xlarge w3-red w3-card-4 button">+</button>
                         </div>
 
@@ -223,14 +225,22 @@ class Home extends Component {
                                             <th>Description</th>
                                             <th>Completed</th>
                                         </tr>
-                                                {this.state.response.map((station) =>
-                                                    <tr>
-                                                        <td onClick={() => this.handleEditButton(station._id, station.description)} >{station.description}</td>
-                                                        {/*implement the change color feature below*/}
-                                                        <td id={'statusOftask'} onClick={() => this.toggleTaskComplete(station._id, station.completed)} className={"button"}>{station.completed}</td>
-                                                        <td className="btn"><i onClick={() => this.handleDeleteButton(station._id)} class="fa fa-trash"></i></td>
-                                                    </tr>
-                                                )}
+                                            {this.state.response.map((station) =>
+                                                <tr>
+                                                    {/* DESCRIPTION */}
+                                                    <td onClick={() => this.handleEditButton(station._id, station.description)} >{station.description}</td>
+
+                                                    {/* STATUS OF TASKS */}
+                                                    <td
+                                                        onClick={() => {this.toggleTaskComplete(station._id, station.completed)}}
+                                                        className={station.completed === 'Yes' ? 'button' : 'button2'}>
+                                                        {station.completed}
+                                                    </td>
+
+                                                    {/* DELETE BUTTON */}
+                                                    <td className="btn"><i onClick={() => this.handleDeleteButton(station._id)} class="fa fa-trash"></i></td>
+                                                </tr>
+                                            )}
                                     </table>
                                 </div>
                             </div>

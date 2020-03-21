@@ -149,14 +149,13 @@ class Login extends Component {
     }
 
 
-
     render(){
         return (
             <div>
-                <body className={"loginbody"}>
+                <body className={"body"}>
                     <div className="container">
                         <span id={"loginError"}></span>
-                        <form onSubmit={this.login_btn}>
+                        <form className={'loginform'} onSubmit={this.login_btn}>
                             <div className="row">
                                 <div className="col">
                                     <h1 className={"signIn"}>Login</h1>

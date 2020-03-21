@@ -114,19 +114,71 @@ class Profile extends Component {
 
     }
 
-    // pop up form to upload photo
-    handleSignUpForm = () => {
-        document.getElementById('id01').style.display='block';
+    // account settings form
+    accountSettings = () => {
+        document.getElementById('accountsettings').style.display='block';
     }
 
-    // close button change photo form
-    handleOnClick2 = () => {
-        document.getElementById('id01').style.display='none'
+    // close button for account settings form
+    closeaccountsettings = () => {
+        document.getElementById('accountsettings').style.display='none'
     }
 
-    // close button edit profile form
-    handleOnClick3 = () => {
-        document.getElementById('id02').style.display='none'
+    // button for change photo form
+    changepicture = () => {
+        document.getElementById('changepicture').style.display='block'
+    }
+
+    // close button for change photo form
+    closechangepicture = () => {
+        document.getElementById('changepicture').style.display='none'
+    }
+
+    // edit profile form
+    editProfile = () => {
+        document.getElementById('editprofile').style.display='block';
+    }
+
+    // close button for edit profile form
+    closeeditprofile = () => {
+        document.getElementById('editprofile').style.display='none'
+    }
+
+    // show/hide email and password change form
+    showHideChangeEmailPasswordButton = (e) => {
+        e.preventDefault()
+
+        if(document.getElementById('emailpasswordform').style.display === 'none'){
+            document.getElementById('emailpasswordform').style.display = 'block'
+        }
+        else
+        {
+            document.getElementById('emailpasswordform').style.display = 'none'
+        }
+    }
+
+    // delete account button
+    deleteAccount = (e) => {
+        e.preventDefault()
+        if(window.confirm('Are you sure you want to delete your account?') === true)
+        {
+            Axios.delete(
+                'http://localhost/users/me',
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                }
+            ).
+            then((res) => {
+                alert('Your account has been successfully deleted')
+                localStorage.clear()
+                window.location.reload()
+            }).
+            catch((e) => {
+                console.log(e)
+            })
+        }
     }
 
     // tab bar
@@ -139,11 +191,6 @@ class Profile extends Component {
             document.getElementById('settings').style.display = "block";
             document.getElementById('about').style.display = "none";
         }
-    }
-
-    // edit profile form
-    editProfile = () => {
-        document.getElementById('id02').style.display='block';
     }
 
 
@@ -182,15 +229,41 @@ class Profile extends Component {
 
                             {/* SECOND TAB */}
                             <div id="settings" class="w3-container city">
-                                <button className={"changePhoto-btn"} onClick={this.handleSignUpForm}>Change Photo</button>
+                                <button className={"changePhoto-btn"} onClick={this.changepicture}>Change Photo</button>
+                                <button className={"changePhoto-btn"} onClick={this.accountSettings}>Account Settings</button>
                                 <button className={"changePhoto-btn"} onClick={this.editProfile}>Edit Profile</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                {/*  ACCOUNT SETTINGS FORM  */}
+                <div id="accountsettings" className="modal"><span onClick={this.closeaccountsettings} className="close" title="Close Modal">&times;</span>
+                    <div className={'signup-div'}>
+                        <form className={'upload-form'}>
+                            <h1>Account Settings</h1>
+                            <div>
+                                <button className={" upload-btn"} onClick={this.showHideChangeEmailPasswordButton}>Change Email or Password</button>
+                                <div id={'emailpasswordform'}>
+                                    <label htmlFor="email"><b>Email</b></label>
+                                    <input onChange={this.updateStateWithInfo} type="email" placeholder="Email" name="email" defaultValue={localStorage.getItem('email')}/>
+
+                                    <label htmlFor="password"><b>Password</b></label>
+                                    <input onChange={this.updateStateWithInfo} type="password" placeholder="Password" name="password" />
+
+                                    <button type={'button'} className={"save-btn "} onClick={this.updateUser}>Save</button>
+                                </div>
+
+                                {/* IMPLEMENT */}
+                                <button className={"changePhoto-btn deleteAccountBtn"} onClick={this.deleteAccount}>Delete Account</button>
+                                <button type={'button'} className={"upload-btn"} onClick={this.closeaccountsettings}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 {/*  CHANGE PICTURE FORM  */}
-                <div id="id01" className="modal"><span onClick={this.handleOnClick2} className="close" title="Close Modal">&times;</span>
+                <div id="changepicture" className="modal"><span onClick={this.closechangepicture} className="close" title="Close Modal">&times;</span>
                     <div className={'signup-div'}>
                         <form className={'upload-form'}>
                             <h1>Profile Picture</h1>
@@ -198,14 +271,14 @@ class Profile extends Component {
                                 <input className={"input-btn"} onChange={this.updateStateWithPhoto} type="file" name="file"/><br/>
                                 <button className={"upload-btn"} onClick={this.photoUpload}>Upload</button>
                                 <button className={"remove-btn"} onClick={this.photoDelete}>Remove Existing Photo</button>
-                                <button type={'button'} className={"upload-btn"} onClick={this.handleOnClick2}>Cancel</button>
+                                <button type={'button'} className={"upload-btn"} onClick={this.closechangepicture}>Cancel</button>
                             </div>
                         </form>
                     </div>
                 </div>
 
             {/*  EDIT PROFILE FORM  */}
-                <div id="id02" className="modal"><span onClick={this.handleOnClick3} className="close" title="Close Modal">&times;</span>
+                <div id="editprofile" className="modal"><span onClick={this.closeeditprofile} className="close" title="Close Modal">&times;</span>
                     <div className={'signup-div'}>
                         <form className={'upload-form'}>
                             <h1>Edit Profile</h1>
@@ -216,17 +289,11 @@ class Profile extends Component {
                                 <label><b>Last Name</b></label>
                                 <input onChange={this.updateStateWithInfo} type="text" placeholder="Last Name" name="lastname" defaultValue={localStorage.getItem('lname')}/>
 
-                                <label htmlFor="email"><b>Email</b></label>
-                                <input onChange={this.updateStateWithInfo} type="email" placeholder="Email" name="email" defaultValue={localStorage.getItem('email')}/>
-
-                                <label htmlFor="password"><b>Password</b></label>
-                                <input onChange={this.updateStateWithInfo} type="password" placeholder="Password" name="password" />
-
-                                <label htmlFor="password"><b>Age</b></label>
+                                <label><b>Age</b></label>
                                 <input onChange={this.updateStateWithInfo} type="number" placeholder="Age" name="age" defaultValue={localStorage.getItem('age')}/>
 
                                 <button type={'button'} className={"save-btn"} onClick={this.updateUser}>Save</button>
-                                <button type={'button'} className={"upload-btn"} onClick={this.handleOnClick3}>Cancel</button>
+                                <button type={'button'} className={"upload-btn"} onClick={this.closeeditprofile}>Cancel</button>
                             </div>
                         </form>
                     </div>

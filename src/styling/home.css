@@ -9,20 +9,26 @@
 
 .head{
     margin: 3% auto;
+    display: inline-block;
 }
 
 .head .container{
     display: flex;
 }
 
+.head .container .button{
+    margin-left: 10px;
+}
+
 .head .delete-btn{
-    width: 40%;
+    width: 100%;
     display: inline-flex;
 }
 
 .head .delete-btn button {
     float: left;
     width: 50%;
+    font-size: 15px;
 }
 
 .head .delete-btn .label {
@@ -195,9 +201,20 @@ input {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-    cursor: pointer;
+    /*cursor: pointer;*/
     /*width: 50%;*/
 }
+
+.button2 {
+    background-color: crimson;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    /*cursor: pointer;*/
+    /*width: 50%;*/
+}
+
 
 .deleteAllBtn{
     border: none;

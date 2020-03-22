@@ -16,8 +16,15 @@
     display: flex;
 }
 
+.head .container .newtask{
+    /*padding: 0;*/
+    text-align: left;
+    width: 60%;
+    margin: 10px;
+}
+
 .head .container .button{
-    margin-left: 10px;
+    margin: 10px;
 }
 
 .head .delete-btn{
@@ -40,6 +47,13 @@
 
 .head .delete-btn .label, .paragraph{
     display: inline-block;
+}
+
+.head .container .date{
+    padding: 0;
+    text-align: center;
+    width: 40%;
+    margin: 10px;
 }
 
 .main-todo-input {

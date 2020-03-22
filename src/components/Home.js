@@ -13,7 +13,7 @@ class Home extends Component {
 
         this.state = {
             response: [],
-            description: ''
+            description: '',
         }
 
 
@@ -51,7 +51,10 @@ class Home extends Component {
     handleAddTask = async () => {
         await Axios.post(
             'http://localhost/tasks',
-            {description: this.state.description},
+            {
+                description: this.state.description,
+                due: this.state.date
+            },
             {
                 headers: {
                     Authorization: localStorage.getItem('token')
@@ -192,6 +195,19 @@ class Home extends Component {
         })
     }
 
+    date = () => {
+        const date = new Date(Date.now())
+
+        const ret = date.getFullYear() + '-0' + date.getMonth() + '-' + date.getDate()
+        document.getElementById('date').defaultValue = ret
+        document.getElementById('date').min = ret
+        this.setState({date: document.getElementById('date').value})
+    }
+
+    // modify date
+    changeDate = () => {
+        this.setState({date: document.getElementById('date').value})
+    }
 
 //***************************************************
     render() {
@@ -205,7 +221,8 @@ class Home extends Component {
 
                     <div className={'head'}>
                         <div className={"container"}>
-                            <input onChange={this.handleChangeDescription} type="text" placeholder="New task"/>
+                            <input className={'newtask'} onClick={this.date} onChange={this.handleChangeDescription} type="text" placeholder={'New task'}/>
+                            <input className={'date'} onChange={this.changeDate} type="date" id="date" name="due" max="2030-12-31"/>
                             <button onClick={this.handleAddTask} className="w3-button w3-xlarge w3-red w3-card-4 button">+</button>
                         </div>
 
@@ -223,12 +240,16 @@ class Home extends Component {
                                     <table>
                                         <tr>
                                             <th>Description</th>
+                                            <th>Due</th>
                                             <th>Completed</th>
                                         </tr>
                                             {this.state.response.map((station) =>
                                                 <tr>
                                                     {/* DESCRIPTION */}
-                                                    <td onClick={() => this.handleEditButton(station._id, station.description)} >{station.description}</td>
+                                                    <td onClick={() => this.handleEditButton(station._id, station.description)}>{station.description}</td>
+
+                                                    {/* DUE DATE */}
+                                                    <td>{station.due.slice(5)}</td>
 
                                                     {/* STATUS OF TASKS */}
                                                     <td

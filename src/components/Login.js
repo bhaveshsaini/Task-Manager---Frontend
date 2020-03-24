@@ -29,7 +29,7 @@ class Login extends Component {
                         password: this.state.password,
                     }
 
-                    Axios.post('http://localhost/users/login', data).then((res) => {
+                    Axios.post('https://task-manager-backendd.herokuapp.com/users/login', data).then((res) => {
                         if (res.data.user == undefined) {
                             document.getElementById("loginError").style.backgroundColor = "#FFBABA"
                             document.getElementById("loginError").style.color = "#D8000C"
@@ -85,7 +85,7 @@ class Login extends Component {
         {
             if(this.state.email.includes('.com')) // if everything is valid then sign up user
             {
-                Axios.post('http://localhost/users', this.state)
+                Axios.post('https://task-manager-backendd.herokuapp.com/users', this.state)
                     .then((res) => {
                         if (this.state.email !== '' && this.state.password !== '') {
                             const data = {
@@ -93,7 +93,7 @@ class Login extends Component {
                                 password: this.state.password
                             }
 
-                            Axios.post('http://localhost/users/login', data)
+                            Axios.post('https://task-manager-backendd.herokuapp.com/users/login', data)
                                 .then((res) => {
                                     localStorage.setItem('token', res.data.user.token)
                                     localStorage.setItem('userId', res.data.user._id)

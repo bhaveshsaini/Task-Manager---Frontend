@@ -18,7 +18,7 @@ class Home extends Component {
 
 
         // get all data from backend
-        Axios.get('http://localhost/mytasks/all',
+        Axios.get('https://task-manager-backendd.herokuapp.com/mytasks/all',
             {
             headers: {
                 Authorization: localStorage.getItem('token')
@@ -50,7 +50,7 @@ class Home extends Component {
     // create a task when user clicks add button
     handleAddTask = async () => {
         await Axios.post(
-            'http://localhost/tasks',
+            'https://task-manager-backendd.herokuapp.com/tasks',
             {
                 description: this.state.description,
                 due: this.state.date
@@ -72,7 +72,7 @@ class Home extends Component {
     // change status of a task
     toggleTaskComplete =  (e, status) => {
          Axios.patch(
-            `http://localhost/tasks/${e}`,
+            `https://task-manager-backendd.herokuapp.com/tasks/${e}`,
             {completed: status === 'Yes' ? 'No' : 'Yes'},
             {
                 headers: {
@@ -102,7 +102,7 @@ class Home extends Component {
     handleEditButton = (id, description) => { // updating the backend
         let task = prompt("Edit task", description);
         Axios.patch(
-            `http://localhost/tasks/${id}`,
+            `https://task-manager-backendd.herokuapp.com/tasks/${id}`,
             {description: task},
             {
                 headers: {
@@ -130,7 +130,7 @@ class Home extends Component {
     // deleting a task
     handleDeleteButton = (id) => {
         Axios.delete(
-            `http://localhost/tasks/${id}`,
+            `https://task-manager-backendd.herokuapp.com/tasks/${id}`,
             {
                 headers: {
                     Authorization: localStorage.getItem('token')
@@ -157,7 +157,7 @@ class Home extends Component {
     // deleting all tasks
     handleDeleteAllTasks = (userId) => {
         Axios.delete(
-            `http://localhost/tasks/deleteall/${userId}`,
+            `https://task-manager-backendd.herokuapp.com/tasks/deleteall/${userId}`,
             {
                 headers: {
                     Authorization: localStorage.getItem('token')
@@ -177,7 +177,7 @@ class Home extends Component {
 
     // get remaining tasks from database
     remainingTasks = () => {
-        Axios.get('http://localhost/mytasks',
+        Axios.get('https://task-manager-backendd.herokuapp.com/mytasks',
             {
                 headers: {
                     Authorization: localStorage.getItem('token')

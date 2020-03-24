@@ -11,7 +11,7 @@ class Profile extends Component {
         if (localStorage.getItem('token') === null)
             this.props.history.push('/')
 
-        Axios.get('http://localhost/users/avatar', // to get the user profile picture from the database
+        Axios.get('https://task-manager-backendd.herokuapp.com/users/avatar', // to get the user profile picture from the database
             {
                 headers: {
                     Authorization: localStorage.getItem('token')
@@ -50,7 +50,7 @@ class Profile extends Component {
         }
 
         Axios.patch(
-            `http://localhost/users/me`,
+            `https://task-manager-backendd.herokuapp.com/users/me`,
             data,
             {
                 headers: {
@@ -78,7 +78,7 @@ class Profile extends Component {
         data.append('pic', this.state.photo, newName)
 
         await Axios.post(
-            'http://localhost/users/upload',
+            'https://task-manager-backendd.herokuapp.com/users/upload',
             data,
             {
                 headers: {
@@ -98,7 +98,7 @@ class Profile extends Component {
         event.preventDefault()
 
         await Axios.delete(
-            'http://localhost/users/avatar/delete',
+            'https://task-manager-backendd.herokuapp.com/users/avatar/delete',
             {
                 headers: {
                     Authorization: localStorage.getItem('token')
@@ -163,7 +163,7 @@ class Profile extends Component {
         if(window.confirm('Are you sure you want to delete your account?') === true)
         {
             Axios.delete(
-                'http://localhost/users/me',
+                'https://task-manager-backendd.herokuapp.com/users/me',
                 {
                     headers: {
                         Authorization: localStorage.getItem('token')
